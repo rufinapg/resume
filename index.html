@@ -169,6 +169,140 @@
   .prev-roles summary:hover::before { color: var(--orange); }
   .prev-roles-inner { padding-top: 0.75rem; }
 
+  /* Current role expandable */
+  .current-role { margin-bottom: 1.25rem; }
+  .current-role summary {
+    list-style: none; cursor: pointer;
+    border-radius: 8px;
+  }
+  .current-role summary::-webkit-details-marker { display: none; }
+  .current-role summary .timeline-item {
+    margin-bottom: 0;
+    border-radius: 0 8px 8px 0;
+    padding-right: 2.25rem;
+    transition: background 0.3s, border-left-color 0.3s;
+    position: relative;
+  }
+  .current-role summary .timeline-item::after {
+    content: '\25BC';
+    position: absolute; right: 0.5rem; top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.7rem; color: var(--yellow);
+    transition: transform 0.3s;
+  }
+  .current-role[open] summary .timeline-item::after { transform: translateY(-50%) rotate(180deg); }
+  .current-role summary:hover .timeline-item,
+  .current-role[open] summary .timeline-item {
+    background: linear-gradient(90deg, rgba(247,179,43,0.18), rgba(247,179,43,0.04));
+    border-left-color: var(--yellow);
+  }
+  .current-role summary:hover .timeline-item::before,
+  .current-role[open] summary .timeline-item::before { background: var(--yellow); }
+  .current-role summary:hover .timeline-item h3 { color: #8a6d00; }
+
+  .role-details {
+    margin: 0.75rem 0 0 0.5rem;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, rgba(247,179,43,0.1), rgba(255,242,102,0.2) 50%, rgba(247,179,43,0.08));
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 14px 14px 0;
+    box-shadow: 0 2px 12px rgba(247,179,43,0.18);
+    animation: roleSlide 0.4s ease;
+  }
+  @keyframes roleSlide {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .role-details h4 {
+    font-size: 0.95rem; font-weight: 800; color: #8a6d00;
+    margin: 1.25rem 0 0.6rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid rgba(247,179,43,0.5);
+    letter-spacing: 0.02em;
+  }
+  .role-details h4:first-child { margin-top: 0; }
+  .role-details ul { list-style: none; padding-left: 0; margin: 0; }
+  .role-details ul li {
+    position: relative;
+    padding: 0.3rem 0 0.3rem 1.25rem;
+    font-size: 0.85rem; line-height: 1.6; color: #3a3a3a;
+  }
+  .role-details ul li::before {
+    content: ''; position: absolute; left: 0; top: 0.85em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--yellow);
+  }
+  .role-details .productions {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;
+  }
+
+  /* Subject list inside summary */
+  .current-role .subject-list {
+    list-style: none; padding-left: 0; margin: 0.4rem 0 0.5rem;
+  }
+  .current-role .subject-list li {
+    position: relative; padding-left: 1.1rem;
+    font-size: 0.88rem; font-weight: 600; color: #333; line-height: 1.7;
+  }
+  .current-role .subject-list li::before {
+    content: ''; position: absolute; left: 0; top: 0.65em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--yellow);
+  }
+
+  /* Class pill dropdowns inside role details */
+  .class-detail { margin-bottom: 0.85rem; }
+  .class-detail summary.class-pill {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    background: linear-gradient(135deg, #f5d954, #fff266, #f5d954);
+    background-size: 200% 200%;
+    color: #4a3d00; padding: 0.55rem 1.25rem; border-radius: 50px;
+    font-size: 0.88rem; font-weight: 700;
+    cursor: pointer; list-style: none;
+    transition: transform 0.3s, box-shadow 0.3s, background-position 0.4s;
+    box-shadow: 0 2px 8px rgba(245,217,84,0.4);
+  }
+  .class-detail summary.class-pill::-webkit-details-marker { display: none; }
+  .class-detail summary.class-pill::after {
+    content: '\25BC'; font-size: 0.6rem; transition: transform 0.3s;
+  }
+  .class-detail[open] summary.class-pill::after { transform: rotate(180deg); }
+  .class-detail summary.class-pill:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 14px rgba(245,217,84,0.6);
+    background-position: 100% 0%;
+  }
+  .class-detail[open] summary.class-pill { background-position: 100% 0%; }
+
+  .class-content {
+    margin: 0.75rem 0 0 0.5rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.55);
+    border-left: 3px solid var(--yellow);
+    border-radius: 0 10px 10px 0;
+    animation: roleSlide 0.3s ease;
+  }
+  .class-content .focus {
+    font-size: 0.85rem; color: #444; margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem; border-bottom: 1px dashed rgba(247,179,43,0.5);
+  }
+  .class-content h5 {
+    font-size: 0.78rem; font-weight: 800; color: #8a6d00;
+    margin: 0.85rem 0 0.4rem;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .class-content ul { list-style: none; padding-left: 0; margin: 0; }
+  .class-content ul li {
+    position: relative; padding: 0.2rem 0 0.2rem 1.1rem;
+    font-size: 0.83rem; line-height: 1.55; color: #3a3a3a;
+  }
+  .class-content ul li::before {
+    content: ''; position: absolute; left: 0; top: 0.7em;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--yellow);
+  }
+  .class-content .skills-line,
+  .class-content .productions-text {
+    font-size: 0.83rem; color: #555; font-weight: 600; margin: 0;
+  }
+
   /* Skills */
   .skills-header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
   .skills-header h2 { flex-shrink: 0; }
@@ -286,8 +420,134 @@
 
   <section class="card">
     <h2>Experience</h2>
-    <div class="role-label">Current Role:</div>
-    <div class="timeline-item"><h3>Musical Theatre & Dance Teacher</h3><div class="org"><a href="https://comptonhs.compton.k12.ca.us/" target="_blank" rel="noopener">Compton High School</a></div><div class="dates">2023 - Present</div></div>
+    <div class="role-label">Current Role: Teacher</div>
+    <details class="current-role">
+      <summary>
+        <div class="timeline-item current-role-item">
+          <ul class="subject-list">
+            <li>Performing Arts, Theatre I</li>
+            <li>Musical Theatre Production</li>
+            <li>Dance 1 (x2)</li>
+            <li>Advanced Dance</li>
+            <li>Link Crew - Mentorship Class</li>
+          </ul>
+          <div class="org">Compton High School</div>
+          <div class="dates">2023 - Present</div>
+        </div>
+      </summary>
+      <div class="role-details">
+        <details class="class-detail">
+          <summary class="class-pill">Performing Arts, Theatre I</summary>
+          <div class="class-content">
+            <p class="focus"><strong>Focus:</strong> Foundations of acting, theatre, and performance</p>
+            <h5>Responsibilities</h5>
+            <ul>
+              <li>Teach acting basics, stage presence, and ensemble skills</li>
+              <li>Introduce script analysis, storytelling, and character development</li>
+              <li>Implement project-based learning (puppetry, scenes, performance tasks)</li>
+            </ul>
+            <h5>Highlights</h5>
+            <ul>
+              <li>Developed scaffolded, student-friendly rubrics &amp; checklists</li>
+              <li>Built inclusive, confidence-driven classroom culture</li>
+            </ul>
+            <h5>Skills</h5>
+            <p class="skills-line">Intro Theatre Instruction | Classroom Management | VAPA Alignment</p>
+          </div>
+        </details>
+
+        <details class="class-detail">
+          <summary class="class-pill">Musical Theatre Production</summary>
+          <div class="class-content">
+            <p class="focus"><strong>Focus:</strong> Full-scale musical production &amp; performance</p>
+            <h5>Recent Productions</h5>
+            <p class="productions-text">IN THE HEIGHTS, THE LITTLE MERMAID, ALADDIN</p>
+            <h5>Responsibilities</h5>
+            <ul>
+              <li>Direct large ensemble productions (60-90 students)</li>
+              <li>Oversee casting, rehearsals, choreography, and staging</li>
+              <li>Coordinate costumes, set design, lighting, and performance logistics</li>
+            </ul>
+            <h5>Highlights</h5>
+            <ul>
+              <li>Led multi-week Musical Theatre Intensive culminating in full production</li>
+              <li>Integrated acting, singing, and dance into cohesive performances</li>
+            </ul>
+            <h5>Skills</h5>
+            <p class="skills-line">Directing | Choreography | Production Management | Collaboration</p>
+          </div>
+        </details>
+
+        <details class="class-detail">
+          <summary class="class-pill">Dance 1 (x2)</summary>
+          <div class="class-content">
+            <p class="focus"><strong>Focus:</strong> Introductory dance &amp; movement fundamentals</p>
+            <h5>Responsibilities</h5>
+            <ul>
+              <li>Teach technique and movement using Body, Energy, Space, Time</li>
+              <li>Build coordination, rhythm, and expressive movement</li>
+              <li>Assess through performance-based tasks</li>
+            </ul>
+            <h5>Highlights</h5>
+            <ul>
+              <li>Created structured, accessible curriculum for beginners</li>
+              <li>Emphasized storytelling through dance</li>
+            </ul>
+            <h5>Skills</h5>
+            <p class="skills-line">Dance Fundamentals | Differentiation | Student Engagement</p>
+          </div>
+        </details>
+
+        <details class="class-detail">
+          <summary class="class-pill">Advanced Dance</summary>
+          <div class="class-content">
+            <p class="focus"><strong>Focus:</strong> Technique, performance, and choreography</p>
+            <h5>Responsibilities</h5>
+            <ul>
+              <li>Develop higher-level technique and performance quality</li>
+              <li>Guide student choreography and creative expression</li>
+              <li>Prepare students for showcase performances</li>
+            </ul>
+            <h5>Highlights</h5>
+            <ul>
+              <li>Produced student-driven choreography showcases</li>
+              <li>Strengthened artistic voice and leadership in dancers</li>
+            </ul>
+            <h5>Skills</h5>
+            <p class="skills-line">Choreography | Performance Coaching | Artistic Development</p>
+          </div>
+        </details>
+
+        <details class="class-detail">
+          <summary class="class-pill">Link Crew - Mentorship Class</summary>
+          <div class="class-content">
+            <p class="focus"><strong>Focus:</strong> Student leadership &amp; peer mentorship</p>
+            <h5>Responsibilities</h5>
+            <ul>
+              <li>Train student leaders to mentor incoming students</li>
+              <li>Facilitate team-building, leadership, and communication activities</li>
+              <li>Support school culture and student transition</li>
+            </ul>
+            <h5>Highlights</h5>
+            <ul>
+              <li>Built strong peer mentorship systems</li>
+              <li>Promoted positive, inclusive school environment</li>
+            </ul>
+            <h5>Skills</h5>
+            <p class="skills-line">Leadership Development | Facilitation | Community Building</p>
+          </div>
+        </details>
+
+        <h4>Core Strengths</h4>
+        <ul>
+          <li>Performance-Based Instruction</li>
+          <li>Curriculum Design (California VAPA)</li>
+          <li>Inclusive &amp; Culturally Responsive Teaching</li>
+          <li>Large-Scale Event &amp; Production Planning</li>
+          <li>Student Engagement &amp; Leadership Development</li>
+        </ul>
+      </div>
+    </details>
     <details class="prev-roles">
       <summary>Previous Roles</summary>
       <div class="prev-roles-inner">
