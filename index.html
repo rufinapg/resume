@@ -146,6 +146,9 @@
   .timeline-item .org a:hover { color: var(--orange); }
   .timeline-item .dates { font-size: 0.78rem; color: #888; }
 
+  /* Default org color where there's no link */
+  .timeline-item .org:not(:has(a)) { color: #000; }
+
   /* Role label */
   .role-label {
     font-size: 0.9rem; font-weight: 600; color: var(--green);
@@ -235,18 +238,55 @@
     display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;
   }
 
-  /* Subject list inside summary */
-  .current-role .subject-list {
-    list-style: none; padding-left: 0; margin: 0.4rem 0 0.5rem;
+  /* Current role toggle (top label) */
+  .current-role-toggle { margin-bottom: 0.4rem; }
+  .current-role-toggle summary.current-role-summary {
+    font-size: 0.9rem; font-weight: 600; color: var(--green);
+    cursor: pointer; padding: 0.4rem 0; list-style: none;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: color 0.3s;
   }
-  .current-role .subject-list li {
-    position: relative; padding-left: 1.1rem;
-    font-size: 0.88rem; font-weight: 600; color: #333; line-height: 1.7;
+  .current-role-toggle summary.current-role-summary::-webkit-details-marker { display: none; }
+  .current-role-toggle summary.current-role-summary::before {
+    content: '\25B6'; font-size: 0.7rem; transition: transform 0.3s, color 0.3s;
+    color: var(--green);
   }
-  .current-role .subject-list li::before {
-    content: ''; position: absolute; left: 0; top: 0.65em;
+  .current-role-toggle[open] summary.current-role-summary::before { transform: rotate(90deg); }
+  .current-role-toggle summary.current-role-summary:hover { color: var(--orange); }
+  .current-role-toggle summary.current-role-summary:hover::before { color: var(--orange); }
+
+  .current-role-strengths {
+    margin: 0.5rem 0 0.75rem 0.5rem;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, rgba(247,179,43,0.1), rgba(255,242,102,0.2) 50%, rgba(247,179,43,0.08));
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 14px 14px 0;
+    box-shadow: 0 2px 12px rgba(247,179,43,0.18);
+    animation: roleSlide 0.4s ease;
+  }
+  .current-role-strengths h4 {
+    font-size: 0.95rem; font-weight: 800; color: #8a6d00;
+    margin: 0 0 0.6rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid rgba(247,179,43,0.5);
+    letter-spacing: 0.02em;
+  }
+  .current-role-strengths ul { list-style: none; padding-left: 0; margin: 0; }
+  .current-role-strengths ul li {
+    position: relative; padding: 0.25rem 0 0.25rem 1.1rem;
+    font-size: 0.85rem; line-height: 1.55; color: #3a3a3a;
+  }
+  .current-role-strengths ul li::before {
+    content: ''; position: absolute; left: 0; top: 0.75em;
     width: 6px; height: 6px; border-radius: 50%; background: var(--yellow);
   }
+
+  /* Class pills list inside current role item */
+  .class-pills-list {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    margin: 0.5rem 0 0.6rem;
+  }
+  .timeline-item .org.current-school { color: var(--blue); }
 
   /* Class pill dropdowns inside role details */
   .class-detail { margin-bottom: 0.85rem; }
@@ -420,22 +460,22 @@
 
   <section class="card">
     <h2>Experience</h2>
-    <div class="role-label">Current Role: Teacher</div>
-    <details class="current-role">
-      <summary>
-        <div class="timeline-item current-role-item">
-          <ul class="subject-list">
-            <li>Performing Arts, Theatre I</li>
-            <li>Musical Theatre Production</li>
-            <li>Dance 1 (x2)</li>
-            <li>Advanced Dance</li>
-            <li>Link Crew - Mentorship Class</li>
-          </ul>
-          <div class="org">Compton High School</div>
-          <div class="dates">2023 - Present</div>
-        </div>
-      </summary>
-      <div class="role-details">
+    <details class="current-role-toggle">
+      <summary class="current-role-summary">Current Role: Teacher</summary>
+      <div class="current-role-strengths">
+        <h4>Core Strengths</h4>
+        <ul>
+          <li>Performance-Based Instruction</li>
+          <li>Curriculum Design (California VAPA)</li>
+          <li>Inclusive &amp; Culturally Responsive Teaching</li>
+          <li>Large-Scale Event &amp; Production Planning</li>
+          <li>Student Engagement &amp; Leadership Development</li>
+        </ul>
+      </div>
+    </details>
+
+    <div class="timeline-item current-role-item">
+      <div class="class-pills-list">
         <details class="class-detail">
           <summary class="class-pill">Performing Arts, Theatre I</summary>
           <div class="class-content">
@@ -537,17 +577,10 @@
             <p class="skills-line">Leadership Development | Facilitation | Community Building</p>
           </div>
         </details>
-
-        <h4>Core Strengths</h4>
-        <ul>
-          <li>Performance-Based Instruction</li>
-          <li>Curriculum Design (California VAPA)</li>
-          <li>Inclusive &amp; Culturally Responsive Teaching</li>
-          <li>Large-Scale Event &amp; Production Planning</li>
-          <li>Student Engagement &amp; Leadership Development</li>
-        </ul>
       </div>
-    </details>
+      <div class="org current-school">Compton High School</div>
+      <div class="dates">2023 - Present</div>
+    </div>
     <details class="prev-roles">
       <summary>Previous Roles</summary>
       <div class="prev-roles-inner">
